@@ -44,7 +44,8 @@ export class GameController extends Component {
         let collider = this.Bird.getComponent(Collider2D);
 
         //Handle collider
-        (collider) && collider.on(Contact2DType.BEGIN_CONTACT, (other: Collider2D) => {
+        (collider) && collider.on(Contact2DType.BEGIN_CONTACT, (self:Collider2D, other: Collider2D) => {
+            console.log(other.tag);
             if (other.tag == 1) this.gameOver()
             else this.passPipe();
         }, this.Bird);

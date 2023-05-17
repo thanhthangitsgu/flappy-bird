@@ -213,13 +213,13 @@
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 3,
-      "y": 3.7
+      "x": -1.7,
+      "y": 1.7
     },
     "_size": {
       "__type__": "cc.Size",
       "width": 85.6,
-      "height": 314.8
+      "height": 296.5
     },
     "_id": ""
   },
@@ -418,13 +418,13 @@
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 3,
-      "y": 0
+      "x": -1.7,
+      "y": 1.7
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 85.5841300191205,
-      "height": 301.4980879541109
+      "width": 85.6,
+      "height": 293.5
     },
     "_id": ""
   },
@@ -503,7 +503,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 25.2,
+      "x": 22.797,
       "y": -140.391,
       "z": 0
     },
@@ -543,7 +543,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 101.202,
       "height": 83.17664670658682
     },
     "_anchorPoint": {
@@ -568,21 +568,21 @@
     "__prefab": {
       "__id__": 26
     },
-    "tag": 2,
+    "tag": -1,
     "_group": 1,
     "_density": 1,
-    "_sensor": false,
+    "_sensor": true,
     "_friction": 0.2,
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": -1.7,
-      "y": 0.7
+      "y": 1.7
     },
     "_size": {
       "__type__": "cc.Size",
       "width": 60.7,
-      "height": 95.9
+      "height": 97.9
     },
     "_id": ""
   },

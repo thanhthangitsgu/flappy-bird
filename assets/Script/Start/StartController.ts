@@ -1,16 +1,20 @@
-import { _decorator, Button, Color, Component, director, Node } from 'cc';
+import { _decorator, Button, Component, director, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
-export enum statusColor {
-    COLOR_RED = 0,
-    COLOR_PINK
-}
-export enum statusMode {
-    MODE_EASY = 0,
-    MODE_HARD
-}
 @ccclass('StartController')
 export class StartController extends Component {
+    @property({
+        type: Node,
+        tooltip: "Option menu"
+    })
+    optionMenu: Node | null = null;
+
+    @property({
+        type: Button,
+        tooltip: "Button submit option"
+    })
+    btnSubmit: Button | null = null;
+
     @property({
         type: Button,
         tooltip: "Button play game"
@@ -19,66 +23,27 @@ export class StartController extends Component {
 
     @property({
         type: Button,
-        tooltip: "Button choose red"
+        tooltip: "Button open option menu"
     })
-    buttonColorRed: Button | null = null;
-
-    @property({
-        type: Button,
-        tooltip: "Button choose pink"
-    })
-    buttonColorPink: Button | null = null;
-
-    private listColor: Button[] = [];
-
-    @property({
-        type: Button,
-        tooltip: "Button choose easy"
-    })
-    buttonEasy: Button | null = null;
-
-    @property({
-        type: Button,
-        tooltip: "Button choose hard"
-    })
-    buttonHard: Button | null = null;
-
-    private color: statusColor = statusColor.COLOR_RED;
+    btnOption: Button | null = null;
 
     protected onLoad(): void {
-        //Init list color
-        this.listColor.push(this.buttonColorRed);
-        this.listColor.push(this.buttonColorPink);
+        this.optionMenu.active = false;
 
-        for (let i = 0; i < this.listColor.length; i++) {
-            this.listColor[i].node.on(Button.EventType.CLICK, () => {
-                this.color = i;
-            })
-        }
-    }
+        //Handle event open option memu
+        this.btnOption.node.on(Button.EventType.CLICK, () => {
+            this.optionMenu.active = true;
+        }, this)
 
-    private handleButtonColor(): void {
-        this.setNormalColor();
-        this.listColor[this.color].normalColor.set(255, 255, 255, 255)
-    }
+        //Handle event close option menu
+        this.btnSubmit.node.on(Button.EventType.CLICK, () => {
+            this.optionMenu.active = false;
+        })
 
-    private setNormalColor(): void {
-        this.listColor.map((_btn) => {
-            _btn.normalColor.set(255, 255, 255, 150);
+        //Handle event start game
+        this.btnPlay.node.on(Button.EventType.CLICK, () => {
+            director.loadScene('Main');
         })
     }
-
-    protected start(): void {
-        this.btnPlay.node.on(Button.EventType.CLICK, () => {
-            director.loadScene("Main");
-        }, this)
-    }
-
-    update(dt: number) {
-        this.setNormalColor();
-        this.handleButtonColor();
-    }
-
-
 }
 
