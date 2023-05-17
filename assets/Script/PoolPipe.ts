@@ -8,9 +8,12 @@ import {
   Vec3,
 } from "cc";
 const { ccclass, property } = _decorator;
+
+//Function random number from min to max
 const random = (max: number, min: number) => {
   return min + Math.floor(Math.random() * (max - min));
 };
+
 @ccclass("GameManger")
 export class GameManger extends Component {
   @property({
@@ -24,9 +27,8 @@ export class GameManger extends Component {
 
   private pos: Vec3 = new Vec3();
 
-
-
   start() {
+    //Init pipe
     for (let i = 0; i < this.listPipe.length; i++) {
       this.listPipe[i] = instantiate(this.pipe);
       if (this.listPipe[i]) this.node.addChild(this.listPipe[i]);
@@ -38,8 +40,9 @@ export class GameManger extends Component {
   }
 
   update(dt: number) {
-    for (let i = 0; i < this.listPipe.length; i++) {
-      this.pos = this.listPipe[i].getPosition();
+    //move pipe
+    this.listPipe.map((pipe) => {
+      this.pos = pipe.getPosition();
       this.pos.x -= this.speed * dt;
 
       if (this.pos.x < -1580) {
@@ -47,7 +50,7 @@ export class GameManger extends Component {
         this.pos.y = random(180, 25);
       }
 
-      this.listPipe[i].setPosition(this.pos);
-    }
+      pipe.setPosition(this.pos);
+    })
   }
 }

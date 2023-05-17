@@ -33,15 +33,19 @@ export class Ground extends Component {
   }
 
   update(deltaTime: number) {
+    //get position of grounds
     this.tempStartFirst = this.groundFirst.position;
     this.tempStartSecond = this.groundSecond.position;
 
+    //move ground
     this.tempStartFirst.x -= this.speed * deltaTime;
     this.tempStartSecond.x -= this.speed * deltaTime;
 
+    //return begin
     if (this.tempStartFirst.x <= this.widthFirst - this.widthGround) {
       this.tempStartFirst.x = this.widthFirst;
     }
+
     if (this.tempStartSecond.x <= this.widthFirst) {
       this.tempStartSecond.x = this.widthSecond;
     }
