@@ -42,6 +42,7 @@ export class StartController extends Component {
 
         //Handle event start game
         this.btnPlay.node.on(Button.EventType.CLICK, () => {
+            director.addPersistRootNode(this.optionMenu);
             director.loadScene('Main');
         })
     }

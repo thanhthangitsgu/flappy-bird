@@ -1,4 +1,4 @@
-import { _decorator, Button, Collider2D, Component, Contact2DType, director, Label, math, Node, RigidBody2D, Vec3 } from 'cc';
+import { _decorator, Button, Collider2D, Component, Contact2DType, director, Label, math, Node, RenderRoot2D, RigidBody2D, Vec3 } from 'cc';
 import { AudioController } from './AudioController';
 const { ccclass, property } = _decorator;
 
@@ -37,6 +37,9 @@ export class GameController extends Component {
     private score: number = 0;
 
     protected onLoad(): void {
+
+        console.log(director.getScene().getChildByName('OptionData').getChildByName('Canvas').getChildByName('color').getComponent(Label));
+
         //Enable restart menu
         this.RestartMenu.active = false;
 
@@ -44,7 +47,7 @@ export class GameController extends Component {
         let collider = this.Bird.getComponent(Collider2D);
 
         //Handle collider
-        (collider) && collider.on(Contact2DType.BEGIN_CONTACT, (self:Collider2D, other: Collider2D) => {
+        (collider) && collider.on(Contact2DType.BEGIN_CONTACT, (self: Collider2D, other: Collider2D) => {
             console.log(other.tag);
             if (other.tag == 1) this.gameOver()
             else this.passPipe();
@@ -63,11 +66,6 @@ export class GameController extends Component {
         highScore && (temp = highScore > this.score ? highScore : this.score)
         localStorage.setItem("highscore", temp.toString());
 
-        //Active restart menu, enable bird
-        this.Score && (this.Score.string = "");
-        this.RestartMenu.active = true;
-        this.Bird.active = false;
-
         this.showResult();
 
         //Reset score
@@ -75,6 +73,11 @@ export class GameController extends Component {
     }
 
     private showResult(): void {
+        //Active restart menu, enable bird
+        this.Score && (this.Score.string = "");
+        this.RestartMenu.active = true;
+        this.Bird.active = false;
+
         //Set up result
         let result = this.RestartMenu.getChildByName('MenuScore').getChildByName('Result').getComponent(Label);
         result.string = this.score.toString();
@@ -82,6 +85,9 @@ export class GameController extends Component {
         let high = this.RestartMenu.getChildByName('MenuScore').getChildByName('HighScore').getComponent(Label);
         high.string = localStorage.getItem('highscore');
     }
+
+
+
 
     private passPipe(): void {
         //Increment score and set label
