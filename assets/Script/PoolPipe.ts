@@ -14,8 +14,8 @@ const random = (max: number, min: number) => {
   return min + Math.floor(Math.random() * (max - min));
 };
 
-@ccclass("GameManger")
-export class GameManger extends Component {
+@ccclass("PoolPile")
+export class PoolPile extends Component {
   @property({
     type: Prefab,
   })
@@ -34,6 +34,7 @@ export class GameManger extends Component {
       if (this.listPipe[i]) this.node.addChild(this.listPipe[i]);
       let x = 460 * i;
       let y = random(180, 25);
+      y = 120;
       this.listPipe[i].setPosition(new Vec3(x, y, 0));
       this.node.setPosition(new Vec3(x, y, 0));
     }

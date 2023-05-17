@@ -148,8 +148,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 137.993334,
-      "y": 426.076188,
+      "x": 215.607,
+      "y": 426.077,
       "z": 0
     },
     "_lrot": {
@@ -3285,6 +3285,8 @@
     "__prefab": {
       "__id__": 145
     },
+    "groundFirst": null,
+    "groundSecond": null,
     "_id": ""
   },
   {
@@ -3300,7 +3302,6 @@
       "__id__": 0
     },
     "fileId": "95ApAUyIBEUoR7AoWYixg/",
-    "instance": null,
-    "targetOverrides": null
+    "instance": null
   }
 ]
