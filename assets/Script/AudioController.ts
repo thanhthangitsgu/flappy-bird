@@ -1,7 +1,7 @@
-import { _decorator, AudioClip, AudioSource, Component, Node } from 'cc';
+import { _decorator, AudioClip, AudioSource, Component, input, Input, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
-export enum audioType {
+export enum AudioType {
     TYPE_DIE = 0,
     TYPE_HIT,
     TYPE_POINT,
@@ -25,14 +25,31 @@ export class AudioController extends Component {
 
     private audioSource: AudioSource = null;
 
-    public start(): void {
-        console.log("check audio");
-        this.audioSource.playOneShot(this.sourceHit, 120);
+    protected start(): void {
+        this.audioSource = this.node.getComponent(AudioSource);
 
-        console.log(this.sourceHit);
-        console.log("check audio");
-
+        //Play sound when click
+        input.on(Input.EventType.MOUSE_UP, () => {
+            this.audioSource.playOneShot(this.sourceSwoosh, 1);
+        }, this)
     }
+
+    public playSound(type: AudioType): void {
+        switch (type) {
+            case AudioType.TYPE_DIE:
+                this.audioSource.playOneShot(this.sourceDie, 1);
+                break;
+            case AudioType.TYPE_HIT:
+                this.audioSource.playOneShot(this.sourceHit, 1);
+                break
+            case AudioType.TYPE_POINT:
+                this.audioSource.playOneShot(this.sourcePoint, 1);
+                break;
+            case AudioType.TYPE_SWOOH:
+                this.audioSource.playOneShot(this.sourceSwoosh, 1);
+        }
+    }
+
 
 
 }
