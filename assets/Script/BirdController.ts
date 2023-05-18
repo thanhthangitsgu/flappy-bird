@@ -1,6 +1,5 @@
-import { _decorator, Component, director, input, Input, Node, Quat, tween, Vec3, } from "cc";
+import { _decorator, Component, director, ImageAsset, input, Input, Node, Quat, resources, Sprite, SpriteFrame, tween, Vec3, } from "cc";
 const { ccclass, property } = _decorator;
-
 @ccclass("Bird")
 
 export class Bird extends Component {
@@ -15,6 +14,12 @@ export class Bird extends Component {
   private background: Node;
 
   protected start(): void {
+
+    const v = this.node.getComponent(Sprite);
+    resources.load('../Texture/pink.png', ImageAsset, (err: any, image) => {
+      v.spriteFrame = SpriteFrame.createWithImage(image);
+      console.log(image);
+    })
 
     //Set variable rotation
     let quatTop: Quat = new Quat();

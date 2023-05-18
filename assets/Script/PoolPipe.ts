@@ -1,5 +1,6 @@
 import { _decorator, Component, director, instantiate, Label, math, Node, Prefab, Vec3, } from "cc";
 import { statusMode } from "./Start/OptionController";
+import { BoardController } from "./Start/BoardController";
 const { ccclass, property } = _decorator;
 
 const MAX_Y = 180;
@@ -21,8 +22,8 @@ export class PoolPile extends Component {
   private speed: number = 200;
 
   protected onLoad(): void {
-    let colorLabel = director.getScene().getChildByName('OptionData').getChildByName('Canvas').getChildByName('mode').getComponent(Label);
-    this.speed = parseInt(colorLabel.string) == statusMode.MODE_EASY ? 200 : 500;
+    //Set speed base on option
+    this.speed = BoardController.getMode() == statusMode.MODE_EASY ? 200 : 500;
   }
 
   protected start(): void {
