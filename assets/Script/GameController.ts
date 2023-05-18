@@ -47,7 +47,6 @@ export class GameController extends Component {
     private score: number = 0;
 
     protected onLoad(): void {
-
         //Disable restart menu
         this.restartMenu.active = false;
 
@@ -84,6 +83,7 @@ export class GameController extends Component {
         highScore && (temp = highScore > this.score ? highScore : this.score)
         localStorage.setItem("highscore", temp.toString());
 
+        //showResult
         this.showResult();
 
         //Reset score

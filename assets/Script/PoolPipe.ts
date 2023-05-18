@@ -1,19 +1,10 @@
-import {
-  _decorator,
-  Component,
-  director,
-  instantiate,
-  Label,
-  math,
-  Node,
-  Prefab,
-  Vec3,
-} from "cc";
+import { _decorator, Component, director, instantiate, Label, math, Node, Prefab, Vec3, } from "cc";
 import { statusMode } from "./Start/OptionController";
 const { ccclass, property } = _decorator;
 
 const MAX_Y = 180;
 const MIN_Y = 25;
+const DISTANCE = 460;
 const LEFT_X = -1580;
 const RIGHT_X = -100;
 
@@ -38,12 +29,11 @@ export class PoolPile extends Component {
     //Init pipe
     for (let i = 0; i < this.listPipe.length; i++) {
       this.listPipe[i] = instantiate(this.pipe);
-
       if (this.listPipe[i]) this.node.addChild(this.listPipe[i]);
 
-      let x = 460 * i;
+      let x = DISTANCE * i;
       let y = math.randomRange(MIN_Y, MAX_Y);
-      y = 200;
+
       this.listPipe[i].setPosition(new Vec3(x, y, 0));
       this.node.setPosition(new Vec3(x, y, 0));
     }

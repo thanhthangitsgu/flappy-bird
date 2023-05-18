@@ -26,13 +26,13 @@ export class Ground extends Component {
   //Speed side of ground
   private speed: number = 200;
 
-  start() {
+  protected start(): void {
     this.widthFirst = this.groundFirst.position.x;
     this.widthSecond = this.groundSecond.position.x;
     this.widthGround = this.widthSecond - this.widthFirst;
   }
 
-  update(deltaTime: number) {
+  protected update(deltaTime: number): void {
     //get position of grounds
     this.tempStartFirst = this.groundFirst.position;
     this.tempStartSecond = this.groundSecond.position;
