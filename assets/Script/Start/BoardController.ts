@@ -1,6 +1,6 @@
-import { _decorator, color, Component, director, Node } from 'cc';
+import { _decorator, Component, director } from 'cc';
 import { statusColor, statusMode } from './OptionController';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass('BoardController')
 export class BoardController extends Component {

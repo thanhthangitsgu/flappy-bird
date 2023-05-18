@@ -1,10 +1,8 @@
-import { _decorator, Button, Collider2D, Component, Contact2DType, director, Label, math, Node, RenderRoot2D, RigidBody2D, Vec3 } from 'cc';
+import { _decorator, Button, Collider2D, Component, Contact2DType, director, game, Label, math, Node, RenderRoot2D, RigidBody2D, Vec3 } from 'cc';
 import { AudioController, AudioType } from './AudioController';
 import { statusColor } from './Start/OptionController';
 import { BoardController } from './Start/BoardController';
 const { ccclass, property } = _decorator;
-
-
 @ccclass('GameController')
 export class GameController extends Component {
     @property({
@@ -63,8 +61,6 @@ export class GameController extends Component {
         //Disable restart menu
         this.restartMenu.active = false;
 
-        let colorLabel = director.getScene().getChildByName('OptionData').getChildByName('Canvas').getChildByName('color').getComponent(Label);
-
         //Set bird
         if (BoardController.getColor() == statusColor.COLOR_RED) {
             this.bird = this.birdRed;
@@ -79,8 +75,7 @@ export class GameController extends Component {
 
         //Handle collider
         (collider) && collider.on(Contact2DType.BEGIN_CONTACT, (self: Collider2D, other: Collider2D) => {
-            if (other.tag == 1) this.gameOver()
-            else this.passPipe();
+            if (other.tag == 1) this.gameOver(); else this.passPipe();
         }, this.bird);
 
         //Handle restart game

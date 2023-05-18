@@ -1,4 +1,4 @@
-import { _decorator, AudioClip, AudioSource, Component, input, Input, Node } from 'cc';
+import { _decorator, AudioClip, AudioSource, Component, director, input, Input, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
 export enum AudioType {
