@@ -1,57 +1,66 @@
 import {
   _decorator,
   Component,
+  director,
   instantiate,
   Label,
+  math,
   Node,
   Prefab,
   Vec3,
 } from "cc";
+import { statusMode } from "./Start/OptionController";
 const { ccclass, property } = _decorator;
 
-//Function random number from min to max
-const random = (max: number, min: number) => {
-  return min + Math.floor(Math.random() * (max - min));
-};
+const MAX_Y = 180;
+const MIN_Y = 25;
+const LEFT_X = -1580;
+const RIGHT_X = -100;
 
 @ccclass("PoolPile")
 export class PoolPile extends Component {
   @property({
     type: Prefab,
   })
-  pipe: Prefab | null = null;
+  private pipe: Prefab | null = null;
 
   private listPipe: Node[] = [null, null, null];
 
+  //Game speed
   private speed: number = 200;
 
-  private pos: Vec3 = new Vec3();
+  protected onLoad(): void {
+    let colorLabel = director.getScene().getChildByName('OptionData').getChildByName('Canvas').getChildByName('mode').getComponent(Label);
+    this.speed = parseInt(colorLabel.string) == statusMode.MODE_EASY ? 200 : 500;
+  }
 
-  start() {
+  protected start(): void {
     //Init pipe
     for (let i = 0; i < this.listPipe.length; i++) {
       this.listPipe[i] = instantiate(this.pipe);
+
       if (this.listPipe[i]) this.node.addChild(this.listPipe[i]);
+
       let x = 460 * i;
-      let y = random(180, 25);
-      y = 120;
+      let y = math.randomRange(MIN_Y, MAX_Y);
+      y = 200;
       this.listPipe[i].setPosition(new Vec3(x, y, 0));
       this.node.setPosition(new Vec3(x, y, 0));
     }
   }
 
-  update(dt: number) {
+  protected update(dt: number): void {
     //move pipe
     this.listPipe.map((pipe) => {
-      this.pos = pipe.getPosition();
-      this.pos.x -= this.speed * dt;
+      let pos = pipe.getPosition();
+      pos.x -= this.speed * dt;
 
-      if (this.pos.x < -1580) {
-        this.pos.x = -100;
-        this.pos.y = random(180, 25);
+      if (pos.x < LEFT_X) {
+        pos.x = RIGHT_X;
+        pos.y = math.randomRange(MIN_Y, MAX_Y);
       }
 
-      pipe.setPosition(this.pos);
+      pipe.setPosition(pos);
     })
   }
 }

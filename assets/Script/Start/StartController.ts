@@ -7,27 +7,28 @@ export class StartController extends Component {
         type: Node,
         tooltip: "Option menu"
     })
-    optionMenu: Node | null = null;
+    private optionMenu: Node | null = null;
 
     @property({
         type: Button,
         tooltip: "Button submit option"
     })
-    btnSubmit: Button | null = null;
+    private btnSubmit: Button | null = null;
 
     @property({
         type: Button,
         tooltip: "Button play game"
     })
-    btnPlay: Button | null = null;
+    private btnPlay: Button | null = null;
 
     @property({
         type: Button,
         tooltip: "Button open option menu"
     })
-    btnOption: Button | null = null;
+    private btnOption: Button | null = null;
 
     protected onLoad(): void {
+        //Hide optioneMenu
         this.optionMenu.active = false;
 
         //Handle event open option memu
@@ -42,7 +43,6 @@ export class StartController extends Component {
 
         //Handle event start game
         this.btnPlay.node.on(Button.EventType.CLICK, () => {
-            director.addPersistRootNode(this.optionMenu);
             director.loadScene('Main');
         })
     }

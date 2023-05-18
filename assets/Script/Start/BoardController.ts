@@ -3,7 +3,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('BoardController')
 export class BoardController extends Component {
-    start() {
+    protected start(): void {
         director.addPersistRootNode(this.node);
     }
 }

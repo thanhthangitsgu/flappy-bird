@@ -1,4 +1,4 @@
-import { _decorator, Button, Color, Component, director, Label, Node } from 'cc';
+import { _decorator, Button, Component, director, Label, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
 export enum statusColor {
@@ -51,28 +51,28 @@ export class StartController extends Component {
         this.listMode.push(this.buttonEasy);
         this.listMode.push(this.buttonHard);
 
+        //Init status
+        this.handleButtonColor();
+        this.handleButtonMode();
+
         //Set color
         for (let i = 0; i < this.listColor.length; i++) {
-            this.listColor[i].node.on(Node.EventType.MOUSE_ENTER, () => {
-                this.listColor[i].onEnable();
-            })
+            this.listColor[i].node.on(Node.EventType.MOUSE_ENTER, () => { this.listColor[i].onEnable(); })
             this.listColor[i].node.on(Button.EventType.CLICK, () => {
+                this.setColor(i);
                 this.listColor.map((btn) => { btn.normalColor.set(255, 255, 255, 150), btn.onDisable() });
                 this.listColor[i].onEnable();
                 this.color = i;
-                this.setColor(i);
             }, this)
         }
 
         //Set mode
         for (let i = 0; i < this.listMode.length; i++) {
-            this.listMode[i].node.on(Node.EventType.MOUSE_ENTER, () => {
-                this.listMode[i].onEnable();
-            })
+            this.listMode[i].node.on(Node.EventType.MOUSE_ENTER, () => { this.listMode[i].onEnable(); })
             this.listMode[i].node.on(Button.EventType.CLICK, () => {
+                this.setMode(i);
                 this.listMode.map((btn) => { btn.normalColor.set(255, 255, 255, 150), btn.onDisable() });
                 this.listMode[i].onEnable();
-                this.setMode(i);
                 this.mode = i;
             }, this)
         }
@@ -97,8 +97,8 @@ export class StartController extends Component {
     }
 
     private setMode(mode: statusMode) {
-        let colorLabel = director.getScene().getChildByName('OptionData').getChildByName('Canvas').getChildByName('mode').getComponent(Label);
-        colorLabel.string = mode.toString();
+        let modeLabel = director.getScene().getChildByName('OptionData').getChildByName('Canvas').getChildByName('mode').getComponent(Label);
+        modeLabel.string = mode.toString();
     }
 
     protected update(): void {
