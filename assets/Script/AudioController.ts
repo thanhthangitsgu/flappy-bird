@@ -28,10 +28,10 @@ export class AudioController extends Component {
     protected start(): void {
         this.audioSource = this.node.getComponent(AudioSource);
 
-        //Play sound when click
-        input.on(Input.EventType.MOUSE_UP, () => {
-            this.audioSource.playOneShot(this.sourceSwoosh, 1);
-        }, this)
+        // //Play sound when click
+        // input.on(Input.EventType.MOUSE_UP, () => {
+        //     this.audioSource.playOneShot(this.sourceSwoosh, 1);
+        // }, this)
     }
 
     public playSound(type: AudioType): void {

@@ -1,4 +1,5 @@
 import { _decorator, Button, Component, director, Label, Node } from 'cc';
+import { BoardController } from './BoardController';
 const { ccclass, property } = _decorator;
 
 export enum statusColor {
@@ -57,9 +58,11 @@ export class StartController extends Component {
 
         //Set color
         for (let i = 0; i < this.listColor.length; i++) {
+
             this.listColor[i].node.on(Node.EventType.MOUSE_ENTER, () => { this.listColor[i].onEnable(); })
+
             this.listColor[i].node.on(Button.EventType.CLICK, () => {
-                this.setColor(i);
+                BoardController.setColor(i);
                 this.listColor.map((btn) => { btn.normalColor.set(255, 255, 255, 150), btn.onDisable() });
                 this.listColor[i].onEnable();
                 this.color = i;
@@ -68,9 +71,11 @@ export class StartController extends Component {
 
         //Set mode
         for (let i = 0; i < this.listMode.length; i++) {
+
             this.listMode[i].node.on(Node.EventType.MOUSE_ENTER, () => { this.listMode[i].onEnable(); })
+
             this.listMode[i].node.on(Button.EventType.CLICK, () => {
-                this.setMode(i);
+                BoardController.setMode(i);
                 this.listMode.map((btn) => { btn.normalColor.set(255, 255, 255, 150), btn.onDisable() });
                 this.listMode[i].onEnable();
                 this.mode = i;
@@ -88,17 +93,6 @@ export class StartController extends Component {
     private handleButtonMode(): void {
         this.listMode[this.mode].onEnable();
         this.listMode[this.mode].normalColor.set(255, 255, 255, 255)
-    }
-
-    //Set option data
-    private setColor(color: statusColor) {
-        let colorLabel = director.getScene().getChildByName('OptionData').getChildByName('Canvas').getChildByName('color').getComponent(Label);
-        colorLabel.string = color.toString();
-    }
-
-    private setMode(mode: statusMode) {
-        let modeLabel = director.getScene().getChildByName('OptionData').getChildByName('Canvas').getChildByName('mode').getComponent(Label);
-        modeLabel.string = mode.toString();
     }
 
     protected update(): void {

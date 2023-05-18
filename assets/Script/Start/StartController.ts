@@ -6,6 +6,11 @@ const { ccclass, property } = _decorator;
 export class StartController extends Component {
     @property({
         type: Node,
+        tooltip: "Start menu"
+    })
+    private startMenu: Node | null = null;
+    @property({
+        type: Node,
         tooltip: "Option menu"
     })
     private optionMenu: Node | null = null;
@@ -41,11 +46,13 @@ export class StartController extends Component {
         this.btnOption.node.on(Button.EventType.CLICK, () => {
             this.audioController.playSound(AudioType.TYPE_SWOOH);
             this.optionMenu.active = true;
+            this.startMenu.active = false;
         }, this)
 
         //Handle event close option menu
         this.btnSubmit.node.on(Button.EventType.CLICK, () => {
             this.audioController.playSound(AudioType.TYPE_SWOOH);
+            this.startMenu.active = true;
             this.optionMenu.active = false;
         })
 

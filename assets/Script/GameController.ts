@@ -1,6 +1,7 @@
 import { _decorator, Button, Collider2D, Component, Contact2DType, director, Label, math, Node, RenderRoot2D, RigidBody2D, Vec3 } from 'cc';
 import { AudioController, AudioType } from './AudioController';
 import { statusColor } from './Start/OptionController';
+import { BoardController } from './Start/BoardController';
 const { ccclass, property } = _decorator;
 
 
@@ -65,7 +66,7 @@ export class GameController extends Component {
         let colorLabel = director.getScene().getChildByName('OptionData').getChildByName('Canvas').getChildByName('color').getComponent(Label);
 
         //Set bird
-        if (parseInt(colorLabel.string) == statusColor.COLOR_RED) {
+        if (BoardController.getColor() == statusColor.COLOR_RED) {
             this.bird = this.birdRed;
             this.birdPink.active = false;
         } else {
