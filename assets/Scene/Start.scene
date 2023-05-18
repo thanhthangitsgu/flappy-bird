@@ -4653,9 +4653,14 @@
     ]
   },
   {
-    "__type__": "8059bbP9xFO67CCI2/iWu1d",
+    "__type__": "c8794w2cihG1ZnpSlTwB1WW",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {
+      "mountedRoot": {
+        "__id__": 51
+      }
+    },
     "node": {
       "__id__": 51
     },
@@ -4665,7 +4670,7 @@
     "groundSecond": {
       "__id__": 56
     },
-    "_id": "82nwxJJnZHCbMLlkV78tT+"
+    "_id": "08y34mOjFCsaaQRdZ/9hzz"
   },
   {
     "__type__": "CCPropertyOverrideInfo",
