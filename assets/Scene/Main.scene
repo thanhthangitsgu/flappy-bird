@@ -975,10 +975,22 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "sourceDie": null,
-    "sourceHit": null,
-    "sourcePoint": null,
-    "sourceSwoosh": null,
+    "sourceDie": {
+      "__uuid__": "42494336-8248-4004-8092-bffc508492f5",
+      "__expectedType__": "cc.AudioClip"
+    },
+    "sourceHit": {
+      "__uuid__": "2b8c8713-9632-4c75-9783-c4e6deeacca2",
+      "__expectedType__": "cc.AudioClip"
+    },
+    "sourcePoint": {
+      "__uuid__": "2a84998d-f67e-48e7-842a-495764420abb",
+      "__expectedType__": "cc.AudioClip"
+    },
+    "sourceSwoosh": {
+      "__uuid__": "e6976e03-1780-4c08-8c42-87eb7780f07e",
+      "__expectedType__": "cc.AudioClip"
+    },
     "_id": "82313voMZPoaqxNN3DTa35"
   },
   {

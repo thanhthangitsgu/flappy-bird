@@ -47,7 +47,6 @@ export class GameController extends Component {
     private score: number = 0;
 
     protected onLoad(): void {
-        console.log(this.scoreLable);
         //Disable restart menu
         this.restartMenu.active = false;
 
