@@ -28,7 +28,7 @@ export class GameController extends Component {
         type: Label,
         tooltip: "Show score"
     })
-    private scoreLable: Label = null;
+    private scoreLable: Label;
 
     //Node of resume menu
     @property({
@@ -47,11 +47,12 @@ export class GameController extends Component {
     private score: number = 0;
 
     protected onLoad(): void {
+        console.log(this.scoreLable);
         //Disable restart menu
         this.restartMenu.active = false;
 
         let colorLabel = director.getScene().getChildByName('OptionData').getChildByName('Canvas').getChildByName('color').getComponent(Label);
- 
+
         //Set bird
         if (parseInt(colorLabel.string) == statusColor.COLOR_RED) {
             this.bird = this.birdRed;
@@ -93,6 +94,7 @@ export class GameController extends Component {
     private showResult(): void {
         //Active restart menu, enable bird
         this.scoreLable && (this.scoreLable.string = "");
+        this.scoreLable.node.active = false;
         this.restartMenu.active = true;
         this.bird.active = false;
 
