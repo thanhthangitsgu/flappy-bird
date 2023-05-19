@@ -1,5 +1,6 @@
 import { _decorator, Button, Component, director, Node } from 'cc';
-import { AudioController, AudioType } from '../AudioController';
+import { AudioController} from '../Game/AudioController';
+import { SCENE_NAME, AudioType } from '../GlobalValue';
 const { ccclass, property } = _decorator;
 
 @ccclass('StartController')
@@ -59,7 +60,7 @@ export class StartController extends Component {
         //Handle event start game
         this.btnPlay.node.on(Button.EventType.CLICK, () => {
             this.audioController.playSound(AudioType.TYPE_SWOOH);
-            director.loadScene('Main');
+            director.loadScene(SCENE_NAME.GAME_SCENE);
         })
     }
 }

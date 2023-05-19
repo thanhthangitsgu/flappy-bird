@@ -1,7 +1,7 @@
 import { _decorator, Button, Collider2D, Component, Contact2DType, director, game, Label, math, Node, RenderRoot2D, RigidBody2D, Vec3 } from 'cc';
-import { AudioController, AudioType } from './AudioController';
-import { statusColor } from './Start/OptionController';
-import { BoardController } from './Start/BoardController';
+import { StatusColor, AudioType, SCENE_NAME } from '../GlobalValue';
+import { AudioController } from './AudioController';
+import { BoardController } from '../Entry/BoardController';
 const { ccclass, property } = _decorator;
 @ccclass('GameController')
 export class GameController extends Component {
@@ -62,7 +62,7 @@ export class GameController extends Component {
         this.restartMenu.active = false;
 
         //Set bird
-        if (BoardController.getColor() == statusColor.COLOR_RED) {
+        if (BoardController.getColor() == StatusColor.COLOR_RED) {
             this.bird = this.birdRed;
             this.birdPink.active = false;
         } else {
@@ -84,7 +84,7 @@ export class GameController extends Component {
             this.audioSource.playSound(AudioType.TYPE_SWOOH)
 
             //Load scene main
-            director.loadScene("Main");
+            director.loadScene(SCENE_NAME.GAME_SCENE);
         }, this)
 
         //Handle exit game
@@ -93,7 +93,7 @@ export class GameController extends Component {
             this.audioSource.playSound(AudioType.TYPE_SWOOH)
 
             //Load scene start
-            director.loadScene("Start");
+            director.loadScene(SCENE_NAME.BEGIN_SCENE);
         }, this)
     }
 
