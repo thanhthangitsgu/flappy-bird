@@ -1,7 +1,8 @@
 import { _decorator, Button, Component, director, Node, Toggle } from 'cc';
-import { AUDIO_VOLUME, SCENE_NAME } from '../GlobalValue';
+import { AUDIO_STATE, AUDIO_VOLUME, SCENE_NAME } from '../GlobalValue';
 import { EffectAudio } from '../Audio/EffectAudio';
 import { BackgroundMusic } from '../Audio/BackgroundMusic';
+import { AudioController } from '../Audio/AudioController';
 const { ccclass, property } = _decorator;
 
 @ccclass('Setting')
@@ -30,18 +31,6 @@ export class Setting extends Component {
     })
     private buttonSubmit: Button;
 
-    @property({
-        type: EffectAudio,
-        tooltip: "Control effect sounds"
-    })
-    private effectAudio: EffectAudio;
-
-    @property({
-        type: BackgroundMusic,
-        tooltip:"Control background music"
-    })
-    private bgMusic: BackgroundMusic;
-
     //Toggle
     @property({
         type: Toggle,
@@ -54,6 +43,12 @@ export class Setting extends Component {
         tooltip: "Control effect sounds"
     })
     private tgEffect: Toggle;
+
+    @property({
+        type: AudioController,
+        tooltip: "Audio controller"
+    })
+    private audioController: AudioController;
 
     protected onLoad(): void {
         //Disable popup
@@ -80,18 +75,18 @@ export class Setting extends Component {
         // Handle on mute background music
         this.tgBackground.node.on('toggle', () => {
             if (this.tgBackground.isChecked) {
-                this.bgMusic._play();
+                this.audioController.controlMusic(AUDIO_STATE.PLAY);
             } else {
-                this.bgMusic._pause();
+                this.audioController.controlMusic(AUDIO_STATE.PAUSE);
             }
         }, this)
 
         //Handle on mute effect audio
         this.tgEffect.node.on('toggle', () => {
             if (this.tgEffect.isChecked) {
-                this.effectAudio.setVolume(AUDIO_VOLUME.VOLUME_MAX);
+                this.audioController.unMuteEffectSound();
             } else {
-                this.effectAudio.setVolume(AUDIO_VOLUME.VOLUME_MIN);
+                this.audioController.muteEffectSound();
             }
         }, this)
     }

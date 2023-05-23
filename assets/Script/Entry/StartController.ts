@@ -1,5 +1,5 @@
 import { _decorator, Button, Component, director, Node } from 'cc';
-import { AudioController } from '../Game/AudioController';
+import { AudioController } from '../Audio/AudioController';
 import { SCENE_NAME, AudioType } from '../GlobalValue';
 import { EffectAudio } from '../Audio/EffectAudio';
 const { ccclass, property } = _decorator;

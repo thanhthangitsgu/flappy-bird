@@ -1,8 +1,7 @@
 import { _decorator, Button, Collider2D, Component, Contact2DType, director, Label, Node } from 'cc';
-import { StatusColor, AudioType, SCENE_NAME } from '../GlobalValue';
+import { StatusColor, AudioType, SCENE_NAME, AUDIO_STATE } from '../GlobalValue';
 import { BoardController } from '../Entry/BoardController';
-import { EffectAudio } from '../Audio/EffectAudio';
-import { BackgroundMusic } from '../Audio/BackgroundMusic';
+import { AudioController } from '../Audio/AudioController';
 const { ccclass, property } = _decorator;
 @ccclass('GameController')
 export class GameController extends Component {
@@ -58,14 +57,9 @@ export class GameController extends Component {
 
     /**----- CONTROL SOUND -----*/
     @property({
-        type: EffectAudio,
+        type: AudioController
     })
-    private audioSource: EffectAudio;
-
-    @property({
-        type: BackgroundMusic
-    })
-    private bgMusic: BackgroundMusic;
+    private audioController: AudioController;
 
     @property({
         type: Node
@@ -104,20 +98,12 @@ export class GameController extends Component {
 
         //Handle restart game
         this.buttonRestart.node.on(Button.EventType.CLICK, () => {
-            //Play sound click
-            this.audioSource.playSound(AudioType.TYPE_SWOOH)
-
-            //Load scene main
             director.loadScene(SCENE_NAME.GAME_SCENE);
             director.resume();
         }, this)
 
         //Handle exit game
         this.buttonExit.node.on(Button.EventType.CLICK, () => {
-            //Play sound click
-            this.audioSource.playSound(AudioType.TYPE_SWOOH)
-
-            //Load scene start
             director.loadScene(SCENE_NAME.BEGIN_SCENE);
             director.resume();
         }, this)
@@ -125,8 +111,8 @@ export class GameController extends Component {
 
     private gameOver(): void {
         //Play sound hit, stop background music
-        this.audioSource?.playSound(AudioType.TYPE_HIT);
-        this.bgMusic?._stop();
+        this.audioController?.controlEffectSound(AudioType.TYPE_HIT);
+        this.audioController?.controlMusic(AUDIO_STATE.STOP);
         this.control.active = false;
 
         //Set high score by local strange
@@ -147,7 +133,7 @@ export class GameController extends Component {
         director.pause();
 
         //Play sound die
-        this.audioSource.playSound(AudioType.TYPE_DIE);
+        this.audioController.controlEffectSound(AudioType.TYPE_DIE);
 
         //Active restart menu, enable bird
         this.scoreLable.node.active = false;
@@ -160,7 +146,7 @@ export class GameController extends Component {
 
     private passPipe(): void {
         //Play sound pass
-        this.audioSource.playSound(AudioType.TYPE_POINT);
+        this.audioController.controlEffectSound(AudioType.TYPE_POINT);
 
         //Increment score and set label
         this.score++;
