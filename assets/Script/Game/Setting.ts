@@ -66,15 +66,12 @@ export class Setting extends Component {
         //Handle open popup 
         this.buttonSetting.node.on(Button.EventType.CLICK, () => {
             director.pause();
-            this.bgMusic._pause();
             this.setting.active = true;
         }, this)
 
         //Handle on submit
         this.buttonSubmit.node.on(Button.EventType.CLICK, () => {
             director.resume();
-            this.bgMusic._play();
-            this.effectAudio.setVolume(0);
             this.setting.active = false;
         }, this)
 
