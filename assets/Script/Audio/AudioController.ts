@@ -154,7 +154,7 @@ export class AudioController extends Component {
 
     //Effect audio
     public controlEffectSound(type: AudioType): void {
-        this.efAudio?.playSound(type);
+        this.efAudio.playSound(type);
     }
 
     public muteEffectSound(): void {
