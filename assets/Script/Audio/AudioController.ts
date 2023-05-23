@@ -142,19 +142,19 @@ export class AudioController extends Component {
     public controlMusic(type: AUDIO_STATE): void {
         switch (type) {
             case AUDIO_STATE.PLAY:
-                this.bgAudio._play();
+                this.bgAudio?._play();
                 break;
             case AUDIO_STATE.STOP:
-                this.bgAudio._stop();
+                this.bgAudio?._stop();
                 break;
             case AUDIO_STATE.PAUSE:
-                this.bgAudio._pause();
+                this.bgAudio?._pause();
         }
     }
 
     //Effect audio
     public controlEffectSound(type: AudioType): void {
-        this.efAudio.playSound(type);
+        this.efAudio?.playSound(type);
     }
 
     public muteEffectSound(): void {
