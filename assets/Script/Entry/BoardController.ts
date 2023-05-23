@@ -4,8 +4,8 @@ const { ccclass } = _decorator;
 
 @ccclass('BoardController')
 export class BoardController extends Component {
-    private static color: StatusColor = 0;
-
+    
+    private static color: StatusColor = StatusColor.COLOR_RED;
     private static mode: StatusMode = StatusMode.MODE_EASY;
 
     public static setColor(_color: StatusColor) {

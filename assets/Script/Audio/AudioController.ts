@@ -4,7 +4,6 @@ import { BackgroundMusic } from './BackgroundMusic';
 import { EffectAudio } from './EffectAudio';
 const { ccclass, property } = _decorator;
 
-
 @ccclass('AudioController')
 export class AudioController extends Component {
     /**______SCENE_ENTRY______ */
@@ -135,8 +134,6 @@ export class AudioController extends Component {
                 this.controlEffectSound(AudioType.TYPE_POINT);
             }, this)
         })
-
-
     }
     //Background music
     public controlMusic(type: AUDIO_STATE): void {
@@ -164,6 +161,4 @@ export class AudioController extends Component {
     public unMuteEffectSound(): void {
         this.efAudio?.setVolume(AUDIO_VOLUME.VOLUME_MAX);
     }
-
 }
-

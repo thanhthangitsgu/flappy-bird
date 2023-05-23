@@ -11,6 +11,7 @@ export class StartController extends Component {
         tooltip: "Start menu"
     })
     private startMenu: Node | null = null;
+    
     @property({
         type: Node,
         tooltip: "Option menu"

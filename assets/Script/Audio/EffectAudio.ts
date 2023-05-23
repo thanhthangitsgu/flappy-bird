@@ -39,6 +39,5 @@ export class EffectAudio extends Component {
     public setVolume(volume: number): void {
         this.volume = volume;
     }
-
 }
 
