@@ -3,7 +3,7 @@ import { StatusMode } from "../GlobalValue";
 import { BoardController } from "../Entry/BoardController";
 const { ccclass, property } = _decorator;
 
-const MAX_Y = 180;
+const MAX_Y = 150;
 const MIN_Y = 25;
 const DISTANCE = 460;
 const LEFT_X = -1580;

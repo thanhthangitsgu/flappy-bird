@@ -11,7 +11,7 @@ export enum StatusColor {
 }
 
 export enum StatusMode {
-    MODE_EASY = 0,
+    MODE_EASY,
     MODE_HARD
 }
 
@@ -35,4 +35,11 @@ export const BIRD_PARAMETER = {
 export const AUDIO_VOLUME = {
     VOLUME_MAX: 1,
     VOLUME_MIN: 0,
+}
+
+export enum AUDIO_STATE {
+    PLAY,
+    PAUSE,
+    RESUME, 
+    STOP
 }
