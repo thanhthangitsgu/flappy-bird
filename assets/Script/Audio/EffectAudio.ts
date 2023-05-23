@@ -1,5 +1,5 @@
 import { _decorator, AudioClip, AudioSource, Component, director, input, Input, Node } from 'cc';
-import { AudioType } from '../GlobalValue';
+import { AUDIO_VOLUME, AudioType } from '../GlobalValue';
 const { ccclass, property } = _decorator;
 
 @ccclass('EffectAudio')
@@ -20,7 +20,7 @@ export class EffectAudio extends Component {
 
     private listAudio = new Map();
 
-    private volume = 1;
+    private volume = AUDIO_VOLUME.VOLUME_MAX;
 
     protected start(): void {
         this.audioSource = this.node.getComponent(AudioSource);

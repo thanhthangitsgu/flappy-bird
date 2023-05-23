@@ -1,5 +1,5 @@
 import { _decorator, Button, Component, director, Node, Toggle } from 'cc';
-import { SCENE_NAME } from '../GlobalValue';
+import { AUDIO_VOLUME, SCENE_NAME } from '../GlobalValue';
 import { EffectAudio } from '../Audio/EffectAudio';
 import { BackgroundMusic } from '../Audio/BackgroundMusic';
 const { ccclass, property } = _decorator;
@@ -77,7 +77,6 @@ export class Setting extends Component {
 
         // Handle on mute background music
         this.tgBackground.node.on('toggle', () => {
-            console.log(this.tgBackground.isChecked);
             if (this.tgBackground.isChecked) {
                 this.bgMusic._play();
             } else {
@@ -88,9 +87,9 @@ export class Setting extends Component {
         //Handle on mute effect audio
         this.tgEffect.node.on('toggle', () => {
             if (this.tgEffect.isChecked) {
-                this.effectAudio.setVolume(1);
+                this.effectAudio.setVolume(AUDIO_VOLUME.VOLUME_MAX);
             } else {
-                this.effectAudio.setVolume(0);
+                this.effectAudio.setVolume(AUDIO_VOLUME.VOLUME_MIN);
             }
         }, this)
     }

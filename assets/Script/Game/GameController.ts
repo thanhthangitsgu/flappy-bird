@@ -1,4 +1,4 @@
-import { _decorator, Button, Collider2D, Component, Contact2DType, director, game, Label, math, Node, RenderRoot2D, RigidBody2D, Vec3 } from 'cc';
+import { _decorator, Button, Collider2D, Component, Contact2DType, director, Label, Node } from 'cc';
 import { StatusColor, AudioType, SCENE_NAME } from '../GlobalValue';
 import { BoardController } from '../Entry/BoardController';
 import { EffectAudio } from '../Audio/EffectAudio';
@@ -80,6 +80,11 @@ export class GameController extends Component {
     })
     private bgMusic: BackgroundMusic;
 
+    @property({
+        type: Node
+    })
+    private control: Node;
+
     //Variable score
     private score: number = 0;
 
@@ -129,11 +134,12 @@ export class GameController extends Component {
         //Play sound hit, stop background music
         this.audioSource?.playSound(AudioType.TYPE_HIT);
         this.bgMusic?._stop();
+        this.control.active = false;
 
         //Set high score by local strange
         let temp = this.score;
         let highScore = Number(localStorage.getItem('highscore'));
-        highScore && (temp = highScore > this.score ? highScore : this.score)
+        temp = highScore && highScore > this.score ? highScore : this.score
         localStorage.setItem("highscore", temp.toString());
 
         //showResult
@@ -151,7 +157,7 @@ export class GameController extends Component {
         this.audioSource.playSound(AudioType.TYPE_DIE);
 
         //Active restart menu, enable bird
-        this.scoreLable && (this.scoreLable.string = "");
+        this.scoreLable.string = "";
         this.scoreLable.node.active = false;
         this.restartMenu.active = true;
         this.bird.active = false;
