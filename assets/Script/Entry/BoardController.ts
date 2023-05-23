@@ -7,11 +7,7 @@ export class BoardController extends Component {
     private static color: StatusColor = 0;
 
     private static mode: StatusMode = 0;
-
-    protected start(): void {
-        director.addPersistRootNode(this.node);
-    }
-
+    
     public static setColor(_color: StatusColor) {
         this.color = _color;
     }

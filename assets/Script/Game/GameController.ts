@@ -6,7 +6,7 @@ import { BackgroundMusic } from '../Audio/BackgroundMusic';
 const { ccclass, property } = _decorator;
 @ccclass('GameController')
 export class GameController extends Component {
-    //Bird
+    /**----- BIRD -----*/
     @property({
         type: Node,
         tooltip: "The red bird"
@@ -25,13 +25,7 @@ export class GameController extends Component {
     })
     private bird: Node = null;
 
-    @property({
-        type: Label,
-        tooltip: "Show score"
-    })
-    private scoreLable: Label;
-
-    //Node of resume menu
+    /**----- RESTART MENU -----*/
     @property({
         type: Node,
         tooltip: "Resart menu"
@@ -62,19 +56,12 @@ export class GameController extends Component {
     })
     private high: Label | null = null;
 
-    @property({
-        type: Node,
-        tooltip: "Setting menu"
-    })
-    private settingMenu: Node;
-
-    //Control effect sound
+    /**----- CONTROL SOUND -----*/
     @property({
         type: EffectAudio,
     })
     private audioSource: EffectAudio;
 
-    //Control background music
     @property({
         type: BackgroundMusic
     })
@@ -85,8 +72,14 @@ export class GameController extends Component {
     })
     private control: Node;
 
-    //Variable score
+    /**----- VARIABLE -----*/
     private score: number = 0;
+
+    @property({
+        type: Label,
+        tooltip: "Show score"
+    })
+    private scoreLable: Label;
 
     protected onLoad(): void {
         //Disable restart menu
@@ -157,10 +150,8 @@ export class GameController extends Component {
         this.audioSource.playSound(AudioType.TYPE_DIE);
 
         //Active restart menu, enable bird
-        this.scoreLable.string = "";
         this.scoreLable.node.active = false;
         this.restartMenu.active = true;
-        this.bird.active = false;
 
         //Set up result
         this.result.string = this.score.toString();

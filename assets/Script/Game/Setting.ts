@@ -30,26 +30,28 @@ export class Setting extends Component {
     })
     private buttonSubmit: Button;
 
-    //Control effect sound
     @property({
         type: EffectAudio,
+        tooltip: "Control effect sounds"
     })
     private effectAudio: EffectAudio;
 
-    //Control background music
     @property({
-        type: BackgroundMusic
+        type: BackgroundMusic,
+        tooltip:"Control background music"
     })
     private bgMusic: BackgroundMusic;
 
     //Toggle
     @property({
         type: Toggle,
+        tooltip: "Control background music"
     })
     private tgBackground: Toggle;
 
     @property({
-        type: Toggle
+        type: Toggle,
+        tooltip: "Control effect sounds"
     })
     private tgEffect: Toggle;
 

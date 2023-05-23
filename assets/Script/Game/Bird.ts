@@ -1,5 +1,5 @@
 import { BIRD_PARAMETER } from '../GlobalValue';
-import { _decorator, Component, Node, Quat, tween, Vec3, } from "cc";
+import { _decorator, Component, Node, Quat, Vec3, } from "cc";
 const { ccclass, property } = _decorator;
 
 @ccclass("Bird")
@@ -36,6 +36,7 @@ export class Bird extends Component {
     if (angle >= BIRD_PARAMETER.MAX_ANGLE) angle = BIRD_PARAMETER.MAX_ANGLE;
     if (angle <= BIRD_PARAMETER.MIN_ANGLE) angle = BIRD_PARAMETER.MIN_ANGLE;
 
+    //Init quat
     let quat: Quat = new Quat();
     Quat.fromEuler(quat, 0, 90, angle);
     this.node.setRotation(quat);
