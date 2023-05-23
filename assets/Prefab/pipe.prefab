@@ -42,7 +42,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": -81.304,
-      "y": 109.427,
+      "y": 133.227,
       "z": 0
     },
     "_lrot": {
@@ -269,6 +269,8 @@
       "__id__": 0
     },
     "fileId": "78PaNeFVpIvpyuNaCieUUI",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -300,7 +302,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 21.802,
-      "y": 63.156,
+      "y": 133.365,
       "z": 0
     },
     "_lrot": {

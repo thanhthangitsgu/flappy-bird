@@ -1,10 +1,12 @@
 import { _decorator, Button, Collider2D, Component, Contact2DType, director, game, Label, math, Node, RenderRoot2D, RigidBody2D, Vec3 } from 'cc';
 import { StatusColor, AudioType, SCENE_NAME } from '../GlobalValue';
-import { AudioController } from './AudioController';
 import { BoardController } from '../Entry/BoardController';
+import { EffectAudio } from '../Audio/EffectAudio';
+import { BackgroundMusic } from '../Audio/BackgroundMusic';
 const { ccclass, property } = _decorator;
 @ccclass('GameController')
 export class GameController extends Component {
+    //Bird
     @property({
         type: Node,
         tooltip: "The red bird"
@@ -49,10 +51,34 @@ export class GameController extends Component {
     private buttonExit: Button | null = null;
 
     @property({
-        type: AudioController,
-        tooltip: "Controller the audio"
+        type: Label,
+        tooltip: "Label show result"
     })
-    private audioSource: AudioController;
+    private result: Label | null = null;
+
+    @property({
+        type: Label,
+        tooltip: "Label show high"
+    })
+    private high: Label | null = null;
+
+    @property({
+        type: Node,
+        tooltip: "Setting menu"
+    })
+    private settingMenu: Node;
+
+    //Control effect sound
+    @property({
+        type: EffectAudio,
+    })
+    private audioSource: EffectAudio;
+
+    //Control background music
+    @property({
+        type: BackgroundMusic
+    })
+    private bgMusic: BackgroundMusic;
 
     //Variable score
     private score: number = 0;
@@ -85,6 +111,7 @@ export class GameController extends Component {
 
             //Load scene main
             director.loadScene(SCENE_NAME.GAME_SCENE);
+            director.resume();
         }, this)
 
         //Handle exit game
@@ -94,12 +121,14 @@ export class GameController extends Component {
 
             //Load scene start
             director.loadScene(SCENE_NAME.BEGIN_SCENE);
+            director.resume();
         }, this)
     }
 
     private gameOver(): void {
-        //Play sound hit
-        this.audioSource && this.audioSource.playSound(AudioType.TYPE_HIT);
+        //Play sound hit, stop background music
+        this.audioSource?.playSound(AudioType.TYPE_HIT);
+        this.bgMusic?._stop();
 
         //Set high score by local strange
         let temp = this.score;
@@ -115,6 +144,9 @@ export class GameController extends Component {
     }
 
     private showResult(): void {
+        //Pause scene
+        director.pause();
+
         //Play sound die
         this.audioSource.playSound(AudioType.TYPE_DIE);
 
@@ -125,11 +157,8 @@ export class GameController extends Component {
         this.bird.active = false;
 
         //Set up result
-        let result = this.restartMenu.getChildByName('MenuScore').getChildByName('Result').getComponent(Label);
-        result.string = this.score.toString();
-
-        let high = this.restartMenu.getChildByName('MenuScore').getChildByName('HighScore').getComponent(Label);
-        high.string = localStorage.getItem('highscore');
+        this.result.string = this.score.toString();
+        this.high.string = localStorage.getItem('highscore');
     }
 
     private passPipe(): void {
